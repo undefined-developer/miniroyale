@@ -7487,7 +7487,7 @@ Menu.prototype.initialize = function() {
     this.weaponAttached_1 = !1,
     this.weaponAttached_2 = !1,
     this.activeAnimationTimer = !1,
-    this.lastEarnGold = 0,
+    this.lastEarnGold = !0,
     this.alreadyWaitingMatch = !1,
     this.currentAnimation = "None",
     this.activeModal = "none",
@@ -7750,11 +7750,6 @@ Menu.prototype.openReward = function(t) {
 }
 ,
 Menu.prototype.showGoldButton = function() {
-    var t = Service.get("last_gold");
-    if (t) {
-        var e = Date.now() - t;
-        this.earnGoldButton.enabled = e > 3e5
-    } else
         this.earnGoldButton.enabled = !0
 }
 ,
@@ -7765,7 +7760,7 @@ Menu.prototype.getGold = function() {
     }, function(e) {
         t.showAlert(e)
     }),
-    Service.set("last_gold", Date.now()),
+    Service.set("last_gold"),
     this.showGoldButton(),
     this.entity.sound.stop("Music"))
 }
